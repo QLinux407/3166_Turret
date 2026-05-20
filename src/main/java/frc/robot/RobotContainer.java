@@ -70,32 +70,13 @@ public class RobotContainer {
 
         //NamedCommands.registerCommand("SAS", getAutonomousCommand());
         //m_chooser.addOption("SAS", getAutonomousCommand());
-        NamedCommands.registerCommand("ShootCommand",
-            new ShootForSecsCommand(m_ShooterSubsystem, 4)
-        );
+        
          NamedCommands.registerCommand("IndexCommand",
             new IndexForSecsCommand(m_IndexerSubsystem, 4)
         );
-        NamedCommands.registerCommand("IntakeDownCommand",
-            new IntakeDownCommand(m_IntakeSubsystem, 1.5)
-        );
-        NamedCommands.registerCommand("RevCommand",
-            new ShootForSecsCommand(m_ShooterSubsystem, 2)
-        );
-        NamedCommands.registerCommand("UpCommand",
-            new IntakeUpCommand(m_IntakeSubsystem, 2)
-        );
-        NamedCommands.registerCommand("Intake",
-            new Intake(m_IntakeSubsystem, 2)
-        );
-        NamedCommands.registerCommand("Shoot", 
-           new ParallelCommandGroup(
-            new IndexForSecsCommand(m_IndexerSubsystem, 4),
-            new ShootForSecsCommand(m_ShooterSubsystem, 4)
-
-        )
-        );
-        NamedCommands.registerCommand("Rev and Shoot", 
+       
+        
+        
         shootCommandGroup());
         //add named command that calls the sequential command group method below, add this to pathplanner as named command
 		m_chooser.addOption("SAS", drivetrain.getAutonomousCommand("SAS"));
@@ -119,25 +100,7 @@ public class RobotContainer {
 		.onTrue(
 				new InstantCommand(() -> drivetrain.resetGyro(), drivetrain)
 		);
-       //index
-        new JoystickButton(joystick.getHID(), ControllerConstants.indexer)
-        .onTrue(new InstantCommand(
-            () -> m_IndexerSubsystem.startIndexerCommand(),
-            m_IndexerSubsystem));
-        new JoystickButton(joystick.getHID(), ControllerConstants.indexer)
-        .onFalse(new InstantCommand(
-            () -> m_IndexerSubsystem.stopIndexerCommand(),
-            m_IndexerSubsystem));
-        //rev
-        new JoystickButton(joystick.getHID(), ControllerConstants.shooterRev)
-        .onTrue(new InstantCommand(
-            () -> m_ShooterSubsystem.startShooterCommand(),
-            m_ShooterSubsystem));
-        new JoystickButton(joystick.getHID(), ControllerConstants.shooterRev)
-        .onFalse(new InstantCommand(
-            () -> m_ShooterSubsystem.stopShooterCommand(),
-            m_ShooterSubsystem));
-        
+       
         //upIntake
         new JoystickButton(joystick.getHID(), ControllerConstants.intakeUp)
         .onTrue(new InstantCommand(
@@ -213,14 +176,5 @@ public class RobotContainer {
 
     }
 
-    public SequentialCommandGroup shootCommandGroup(){
-        return  new SequentialCommandGroup(
-            new ShootForSecsCommand(m_ShooterSubsystem, 1.5),
-            new ParallelCommandGroup(
-                new ShootForSecsCommand(m_ShooterSubsystem, 4),
-                new IndexForSecsCommand(m_IndexerSubsystem, 4)
-            )
-        );
-
-    }
+    
 }
