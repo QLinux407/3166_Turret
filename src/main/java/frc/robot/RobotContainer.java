@@ -96,40 +96,20 @@ public class RobotContainer {
             )
         );
         
-        new JoystickButton(joystick.getHID(), 7)
-		.onTrue(
-				new InstantCommand(() -> drivetrain.resetGyro(), drivetrain)
-		);
+        // new JoystickButton(joystick.getHID(), 7)
+		// .onTrue(
+		// 		new InstantCommand(() -> drivetrain.resetGyro(), drivetrain)
+		// );
        
         //upIntake
-        new JoystickButton(joystick.getHID(), ControllerConstants.intakeUp)
+        
+       new JoystickButton(joystick.getHID(), ControllerConstants.intakeUp)
         .onTrue(new InstantCommand(
             () -> m_IntakeSubsystem.MoveUpIntakeCommand(),
-            m_IntakeSubsystem));
-        new JoystickButton(joystick.getHID(), ControllerConstants.intakeUp)
+            m_IntakeSubsystem))
         .onFalse(new InstantCommand(
-            () -> m_IntakeSubsystem.StopIntakeElavator(),
-            m_IntakeSubsystem));
-       
-        //downIntake
-        new JoystickButton(joystick.getHID(), ControllerConstants.intakeDown)
-        .onTrue(new InstantCommand(
-            () -> m_IntakeSubsystem.MoveDownIntakeCommand(),
-            m_IntakeSubsystem));
-        new JoystickButton(joystick.getHID(), ControllerConstants.intakeDown)
-        .onFalse(new InstantCommand(
-            () -> m_IntakeSubsystem.StopIntakeElavator(),
-            m_IntakeSubsystem));
-        //intake run
-        new JoystickButton(joystick.getHID(), ControllerConstants.intake)
-        .onTrue(new InstantCommand(
-            () -> m_IntakeSubsystem.startIntakeCommand(),
-            m_IntakeSubsystem));
-        new JoystickButton(joystick.getHID(), ControllerConstants.intake)
-        .onFalse(new InstantCommand(
-            () -> m_IntakeSubsystem.stopIntakeCommand(),
-            m_IntakeSubsystem));
-        
+            () -> m_IntakeSubsystem.MoveUpIntakeCommand(),
+            m_IntakeSubsystem))    
 
         
 
