@@ -40,6 +40,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.IntakeUpCommand;
 import frc.robot.commands.Intake;
+import frc.robot.commands.Turret;
 
 public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -57,7 +58,7 @@ public class RobotContainer {
     public final IndexerSubsystem m_IndexerSubsystem = new IndexerSubsystem();
     public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
     public final IntakeSubsystem m_IntakeSubsystem = new IntakeSubsystem();
-
+    public final Turret m_Turret = new Turret();
     
 	private SendableChooser<Command> m_chooser = new SendableChooser<>();
     
@@ -77,7 +78,7 @@ public class RobotContainer {
        
         
         
-        shootCommandGroup());
+        shootCommandGroup();
         //add named command that calls the sequential command group method below, add this to pathplanner as named command
 		m_chooser.addOption("SAS", drivetrain.getAutonomousCommand("SAS"));
         SmartDashboard.putData("Automode", m_chooser);
@@ -105,11 +106,11 @@ public class RobotContainer {
         
        new JoystickButton(joystick.getHID(), ControllerConstants.intakeUp)
         .onTrue(new InstantCommand(
-            () -> m_IntakeSubsystem.MoveUpIntakeCommand(),
-            m_IntakeSubsystem))
+            () -> m_Turret.ShootTurret(),
+            m_Turret))
         .onFalse(new InstantCommand(
-            () -> m_IntakeSubsystem.MoveUpIntakeCommand(),
-            m_IntakeSubsystem))    
+            () -> m_Turret.stopTurret(),
+            m_Turret))    
 
         
 

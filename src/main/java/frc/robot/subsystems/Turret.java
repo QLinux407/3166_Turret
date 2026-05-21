@@ -11,24 +11,25 @@ import frc.robot.Constants.IntakeConstants;
 
 
 public class Turret extends SubsystemBase{
-    private Talon intakeElavator;
-    private Talon intakeMotor;
+    private TalonFx turretrot;
+    private TalonFx turrethood;
+    private TalonFx turretwheel;
     
     public Turret() {
-        intakeElavator = new Talon(IntakeChannelConstants.k_Elavator);
-        intakeMotor = new Talon(IntakeChannelConstants.k_MainIntake);
-        
+        turretrot = new TalonFx(40);
+        turrethood = new TalonFx(41);
+        turretwheel = new TalonFx(42);
 
     }
 
     public void ShootTurret() {
        
-        intakeMotor.set(IntakeConstants.k_MainIntakeSpeed);
+        turretwheel(1);
     }
 
     public void stopTurret() {
     
-        intakeMotor.set(0);
+        turretwheel(0)
     }
     
         

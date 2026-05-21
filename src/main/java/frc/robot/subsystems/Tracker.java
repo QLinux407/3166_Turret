@@ -6,7 +6,6 @@ public class Tracker {
     public static Tracker getInstance() {
         return instance;
     }
-    
 
     private Tracker() {
 
